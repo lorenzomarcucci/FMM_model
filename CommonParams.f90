@@ -28,13 +28,10 @@ module CommonParams
   
   real(8), parameter :: steady_time = 2.d8!, start_time = steady_time +0.507d8  !fo the analysis of Fusi, + 110 ms +st (200ms)
 
-  !real(8), parameter :: piperine=1.497d0 !Effect of thepiperine
-
-   real(8) :: piperine !Effect of thepiperine
+   real(8) :: piperine !Effect of the piperine
    real(8) :: start_time !for the analysis of Fusi, + 110 ms +st (200ms)
     real(8) :: ON_min = 0.d0
   real(8) :: ON_max = 0.d0!to adapt the new T_on_man to a more elegant limit
-  
 
   
   integer, parameter :: Ca_off = 0, Ca_on_x = 1, Ca_on = 2  !state of the TT unit
@@ -63,7 +60,6 @@ module CommonParams
  
 
   !MPI
-!  include 'mpif.h'
   integer :: myId, nProcs, ierr
   character(len=2) fid
 
