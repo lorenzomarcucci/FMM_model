@@ -2,7 +2,6 @@ module Attach_detach
   
   use CommonParams
   use Rnd_seed
-  ! use Minima_switch
   use Actomyos_Energy_Params, only : d_min, n_m
   implicit none
   
@@ -64,25 +63,6 @@ contains
     
 
     do j = 1, Nfil
-
-      
-
-       !Xb based cooperativity
-    !   if (XB_fil .le. 2) then
-    !      ON_fact = ON_min
-    !   else if (XB_fil .le. 8) then
-    !      ON_fact = ON_max-(ON_max-ON_min)/(8-2)*(8-XB_fil)
-    !   else if (XB_fil .gt. 8) then
-    !      ON_fact=ON_max
-    !   end if
-
-       !Tension based cooperativity
-       
-    !   if (T_fil .gt.0) then
-    !      ON_fact = ON_min + (ON_max-ON_min)*exp(-ON_tau/(max(0.d0,(T_fil+F_titin))**2))
-    !   else
-    !      ON_fact=ON_min
-    !   end if
   
     T_fil=0.d0
 
@@ -126,22 +106,6 @@ contains
           else if (T_fil .le. T_on_min) then
              ON_fact = pos_fact*ON_min
           end if
-
-
-
-!!!str Kon(T)
-!          if (mod(TotalTime,10000.) .eq. 0.) then
-!             if ((j==900) .and. (myId==0) .and. (i==1)) then
-!                write(3,'(6e14.5)') T_fil, ON_fact,  alpha_WD_fact*kdw*(ON_fact)*DT*1e6
-!             end if
-!          end if
-!          
-!          if (mod(TotalTime,10000.) .eq. 0.) then
-!             if ((j==900) .and. (myId==2) .and. (i==1)) then
-!                write(4,'(6e14.5)') T_fil, ON_fact,  alpha_WD_fact*kdw*(ON_fact)*DT*1e6
-!             end if
-!          end if          
-!!!!end kON(T)
           
           
           n_coop=0 !co-operativity n factor
@@ -188,10 +152,8 @@ contains
           else if (AttachFlag(i, j) .ge. a_state_1) then
            
              ind_TT = int((x_SL-z)/d_TT)+1 
-             !  cycle
              if ((x(i,j)+y0(i,j)) .ge. 0) then
                 stod = (x(i,j)+y0(i,j))*probd*MI_AD_fact
-            !    stod = 4*probd
              else 
                 stod =  probd_N*(1+abs(x(i, j)+y0(i,j)))
              end if
